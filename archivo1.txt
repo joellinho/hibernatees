@@ -1,5 +1,8 @@
 
 hola munto
+<<<<<<< HEAD
 
 mensaje para cambio
 
+=======
+>>>>>>> caracteristicas
