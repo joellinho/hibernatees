@@ -1,19 +1,29 @@
 package test;
 
+
+
+
+
 import modelo.Profesor;
-import modelo.tipofuncionario;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+
 import dao.CorreoElectronicoDAO;
 import dao.DireccionDAO;
 import dao.moduloDAO;
 import dao.profesorDAO;
 import dominio.DAOfactory;
+import dominio.oSessionFactory;
+import java.util.List;
 
 public class test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		
+		Session session = oSessionFactory.getSession();
 			
 		DAOfactory mysqlFactory = DAOfactory.getDaoFactory(DAOfactory.MYSQL);
        profesorDAO profesorDao = mysqlFactory.getProfesorDao();
@@ -119,17 +129,71 @@ public class test {
         modulo3.getProfesores().add(profesor2);
         profesorDao.insert(profesor1);
         profesorDao.insert(profesor2);
-        Profesor profesorbyId= profesorDao.findById(31);
-        
-        
+        Profesor profesorbyId= profesorDao.findById(31);      
        System.out.println(profesorbyId.getNombre()); 
        */
-	
+       
+       
+       
+	/**agregando atributo enum
        Profesor profesorn = new Profesor(50,"joel","enciso","saravia",tipofuncionario.Interino);
        profesorDao.insert(profesorn);
       Profesor profesorById = profesorDao.findById(50);
       System.out.println(profesorById.getNombre());
+	*/
+
+       
+       
+     /*  hql simple code lista       
+	Query query = session.createQuery("SELECT p FROM Profesor p");
+    List<Profesor> profesores = query.list();
+    for (Profesor profesor : profesores) {
+		System.out.println(profesor.toString());*/
+	
+       
+       
+   /* hql atributos 
+    * Query query = session.createQuery("SELECT p.id,p.nombre,p.ape1 FROM Profesor p");
+    List<Object[]> atrrPerson = query.list();
+    for (Object[] datos : atrrPerson) {
+		System.out.println(datos[0]+"--"+datos[1]+"--"+datos[2]+"");
+	}*/
+       
+       
+
+       /* hql where
+       Profesor porfesor = (Profesor)session.createQuery("SELECT p FROM Profesor p WHERE id =1001 ").uniqueResult();
+       System.out.println("profesor id =1 "+ porfesor.getNombre());
+    */
+    
+       
+       /*paginacion hql
+       int tamanyopPagina=10;
+      // int paginaAMostrar=7;
+       
+       long totalobjetos = (long)session.createQuery("SELECT COUNT(*) FROM Profesor p").uniqueResult();
+       Query query = session.createQuery("SELECT p FROM Profesor p");
+       int numPaginas = (int )Math.ceil((double)totalobjetos/(double)tamanyopPagina);
+       query.setMaxResults(tamanyopPagina);
+      query.setFirstResult(numPaginas*tamanyopPagina);
+       List<Profesor> profesoresList = query.list();
+       for (Profesor profesores : profesoresList) {
+		System.out.println(profesoresList.toString());
+	}*/
+       
+       
+     Query query = session.createQuery("SELECT p.id FROM Profesor p WHERE nombre='joel' ");
+     List<Integer> nombres = query.list();
+     for (Integer object : nombres) {
+		System.out.println(object.toString());
 	}
-		
+       
+     Query query2 = session.createQuery("SELECT p FROM Profesor p WHERE nombre='ISABEL' AND ape1<>'ORELLANA'");  
+    List<Profesor> profesoresList = query2.list();
+    
+    for (Profesor profesor : profesoresList) {
+		System.out.println(profesor.getApe1());
+	}
+	}       				
 
 }
