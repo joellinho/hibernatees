@@ -139,6 +139,7 @@ public class Profesor implements Serializable {
 			
 			modelo.tipofuncionario tipofuncionario) {
 		super();
+		
 		this.id = id;
 		this.nombre = nombre;
 		this.ape1 = ape1;
@@ -146,5 +147,4 @@ public class Profesor implements Serializable {
 		
 		this.tipofuncionario = tipofuncionario;
 	}
-
 }

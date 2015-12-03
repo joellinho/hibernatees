@@ -77,7 +77,7 @@ public class test {
        System.out.println(profesor2.getApe2()+direccion3);*/
     
        
-       
+       ;
      /***  one to manu--many to one
        Profesor profesor3 = new Profesor();
        profesor3.setId(23);
@@ -180,20 +180,44 @@ public class test {
        for (Profesor profesores : profesoresList) {
 		System.out.println(profesoresList.toString());
 	}*/
+//       
        
-       
-     Query query = session.createQuery("SELECT p.id FROM Profesor p WHERE nombre='joel' ");
-     List<Integer> nombres = query.list();
-     for (Integer object : nombres) {
-		System.out.println(object.toString());
-	}
-       
+//     Query query = session.createQuery("SELECT p.id FROM Profesor p WHERE nombre='joel' ");
+//     List<Integer> nombres = query.list();
+//     for (Integer object : nombres) {
+//		System.out.println(object.toString());
+//	}
+//       
+     
+     
      Query query2 = session.createQuery("SELECT p FROM Profesor p WHERE nombre='ISABEL' AND ape1<>'ORELLANA'");  
     List<Profesor> profesoresList = query2.list();
     
     for (Profesor profesor : profesoresList) {
 		System.out.println(profesor.getApe1());
 	}
+//	
+//    Query query3 = session.createQuery("SELECT p.nombre FROM Profesor p WHERE id BETWEEN 1 AND 10");
+//    List<String> nombress = query3.list();
+//    for (String string : nombress) {
+//		System.out.println(string);
+//    }
+//	
+	Query query4 = session.createQuery("SELECT p.nombre FROM Profesor p WHERE nombre LIKE '_el%'");
+	List<String> nombres2 = query4.list();
+	for (String string : nombres2) {
+		System.out.println("OPERADOR %_ "+string);
+	}
+	
+	Query query5 = session.createQuery("SELECT p.nombre FROM Profesor p WHERE tipofuncionario IS NULL");
+	List<String> id = query5.list();
+	for (String string : id) {
+		System.out.println("is null"+string);
+	}
+	
+	
+	
 	}       				
 
+	
 }
